@@ -10,20 +10,17 @@
 #include <ctime>
 using namespace std;
 
-void simulateGame(map<string, array<list<int>, 3>> &, const string &);
-
 // Definition for function to simulate a game for a team 
     // parameters: map of team and list to update stats
     // creates a variable to randomly assign how the team is going to play
     // randomly create stats for points, rebounds, assists - add to the lists
-void simulateGame(map<string, array<list<int>, 3>> & teamStats, const string & teamName) {
+void simulateGame(map<string, array<list<int>, 3> > &teamStats, const string &teamName) {
     // Add random numbers to the team's lists in the map
     teamStats[teamName][0].push_back(rand() % 40 + 1);
     teamStats[teamName][1].push_back(rand() % 20 + 1);
     teamStats[teamName][2].push_back(rand() % 10 + 1);
 
 }
-
 
 // Define main function
 int main() {
@@ -44,7 +41,7 @@ int main() {
             // put the stats into the proper list for the team
     string teamName;
     int points, rebounds, assists;
-    file >> teamName >> rebounds >> points >> assists;
+    file >> teamName >> points >> rebounds >> assists;
 
     // insert team name
     teamStats[teamName] = array<list<int>, 3>();
@@ -61,7 +58,7 @@ int main() {
         // For a loop of 25 times
         for (int i = 0; i < 1; i++){
 
-            cout << "Game " << i << "has been played" << endl;
+            cout << "Game " << i + 1 << " has been played" << endl;
             // Go through each team on map 
             for (auto & pair : teamStats) {
                 // call the function to input stats for one game for the team
@@ -75,8 +72,30 @@ int main() {
 
     // end the main function
     // Iterate through each team in teamStats
-    
+    // Iterate through each team in teamStats
+    for (const auto& [teamName, statsArray] : teamStats) {
+        cout << "Team: " << teamName << endl;
 
+        // Display points for each game
+        cout << "Points per game: ";
+        for (const int points : statsArray[0]) {
+            cout << points << " ";
+        }
+        cout << endl;
 
+        // Display rebounds for each game
+        cout << "Rebounds per game: ";
+        for (const int rebounds : statsArray[1]) {
+            cout << rebounds << " ";
+        }
+        cout << endl;
 
+        // Display assists for each game
+        cout << "Assists per game: ";
+        for (const int assists : statsArray[2]) {
+            cout << assists << " ";
+        }
+        cout << endl;
+    }
 }
+
