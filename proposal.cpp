@@ -1,14 +1,26 @@
 // Ethan Dilk | COMSC 210 | Lab 29 Proposal
 // include necessary headers related to data structures
+#include <iostream>
+#include <fstream>
+#include <map>
+#include <array>
+#include <list>
+#include <string>
+#include <cstdlib>  
+#include <ctime>
+using namespace std;
 
 // Definition for function to simulate a game for a team 
     // parameters: map of team and list to update stats
     // creates a variable to randomly assign how the team is going to play
     // randomly create stats for points, rebounds, assists - add to the lists
 
-// Define main function
-    // Initialize a map used to store team information - each team will have array of lists for points, rebounds, assists
 
+
+// Define main function
+int main() {
+    // Initialize a map used to store team information - each team will have array of lists for points, rebounds, assists
+    ma
     // Open external file to read data on first 5 games of the season 
         // print error and exit if file doesn't open
     
@@ -29,4 +41,4 @@
 
     // end the main function
 
-    
+}
