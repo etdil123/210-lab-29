@@ -23,10 +23,12 @@ void simulateGame(map<string, array<list<int>, 3> > &teamStats, const string &te
 }
 
 void check_stats(map<string, array<list<int>, 3> > &teamStats, const string &teamName) {
-    for (auto & pair : teamStats) {
-                // call the function to input stats for one game for the team
-                simulateGame(teamStats, pair.first);
-            }
+    // call the function to input stats for one game for the team
+    simulateGame(teamStats, pair.first);
+    // Access the last element of each list for points, rebounds, and assists
+    int lastPoints = teamStats.at(teamName)[0].back();
+    int lastRebounds = teamStats.at(teamName)[1].back();
+    int lastAssists = teamStats.at(teamName)[2].back();
 }
 
 // Define main function
