@@ -1,0 +1,7 @@
+Unit Testing
+
+For this program, I would use unit testing to test the function that simulates the games
+and stores the corresponding data into that teams map and list 
+- the unit test would make sure that the data is stored for the right team
+- unit teast would make sure the randomization of numbers for stats is also correct
+- there would be an output statement to display that the correct data is showing - the function returns void so it's important that the output statment is included 
