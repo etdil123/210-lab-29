@@ -22,6 +22,22 @@ void simulateGame(map<string, array<list<int>, 3> > &teamStats, const string &te
 
 }
 
+void check_stats(map<string, array<list<int>, 3> > &teamStats, const string &teamName) {
+    for (auto & pair : teamStats) {
+        // call the function to input stats for one game for the team
+        simulateGame(teamStats, pair.first);
+        // Access the last element of each list for points, rebounds, and assists
+        int lastPoints = teamStats.at(teamName)[0].back();
+        int lastRebounds = teamStats.at(teamName)[1].back();
+        int lastAssists = teamStats.at(teamName)[2].back();
+
+        cout << "Team Added: " << teamName << endl;
+        cout << "Points: " << lastPoints << endl;
+        cout << "Rebounds: " << lastRebounds << endl;
+        cout << "Assists: " << lastAssists << endl;
+    }
+}
+
 // Define main function
 int main() {
     // Initialize a map used to store team information - each team will have array of lists for points, rebounds, assists
@@ -66,6 +82,8 @@ int main() {
             }
                 // call the function to input stats for one game for the team
         }
+
+    check_stats(teamStats, "Lakers");
 
     // rank and display the teams at the end of the season to show season performance
     cout << "Season Rankings: " << endl;
