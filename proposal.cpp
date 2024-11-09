@@ -22,6 +22,13 @@ void simulateGame(map<string, array<list<int>, 3> > &teamStats, const string &te
 
 }
 
+void check_stats(map<string, array<list<int>, 3> > &teamStats, const string &teamName) {
+    for (auto & pair : teamStats) {
+                // call the function to input stats for one game for the team
+                simulateGame(teamStats, pair.first);
+            }
+}
+
 // Define main function
 int main() {
     // Initialize a map used to store team information - each team will have array of lists for points, rebounds, assists
