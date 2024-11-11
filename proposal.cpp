@@ -62,6 +62,9 @@ void check_stats(map<string, array<list<int>, 3> > &teamStats, const string &tea
 
 // Define main function
 int main() {
+
+    int columnWidth = 15;
+
     cout << "------------------------------------------------" << endl;
     cout << "Welcome to the start of a new basketball season!" << endl;
     cout << "------------------------------------------------" << endl;
@@ -131,7 +134,8 @@ int main() {
     // Iterate through each team in teamStats
     // Iterate through each team in teamStats
     for (const auto& [teamName, statsArray] : teamStats) {
-        cout << "Team: " << teamName << endl;
+
+        cout << left << setw(columnWidth) << "Team: " << setw(columnWidth) << teamName << endl;
 
         // Display points for each game
         cout << "Points per game: ";
