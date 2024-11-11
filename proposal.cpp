@@ -63,7 +63,7 @@ void check_stats(map<string, array<list<int>, 3> > &teamStats, const string &tea
 // Define main function
 int main() {
 
-    int columnWidth = 15;
+    int columnWidth = 20;
 
     cout << "------------------------------------------------" << endl;
     cout << "Welcome to the start of a new basketball season!" << endl;
@@ -133,11 +133,12 @@ int main() {
     // end the main function
     // Iterate through each team in teamStats
     // Iterate through each team in teamStats
-    for (const auto& [teamName, statsArray] : teamStats) {
 
-        // display header of tables
-        cout << left << setw(columnWidth) << "Team: " << setw(columnWidth) << "Total Points" << setw(columnWidth) << "Avg Points per Game" 
-        << setw(columnWidth) << "Total Assists" << setw(columnWidth) << "Total Rebounds" << endl;
+    // display header of tables
+    cout << left << setw(columnWidth) << "Team: " << setw(columnWidth) << "Total Points" << setw(columnWidth) << "Avg Points" 
+    << setw(columnWidth) << "Total Assists" << setw(columnWidth) << "Total Rebounds" << endl;
+
+    for (const auto& [teamName, statsArray] : teamStats) {
 
         // display team name
         cout << left << setw(columnWidth) << teamName;
@@ -147,24 +148,28 @@ int main() {
         for (const int points : statsArray[0]) {
             totalSeasonPoints += points;
         }
+        // get average points per game
         float avgSeasonPoints = static_cast<float>(totalSeasonPoints) / 25;
-
+        
+        // display total and average points
         cout << left << setw(columnWidth) << totalSeasonPoints;
         cout << left << setw(columnWidth) << avgSeasonPoints;
 
-        // Display rebounds for each game
-        cout << "Rebounds per game: ";
+        // Display total season rebounds for the team
+        int totalSeasonRebounds = 0;
         for (const int rebounds : statsArray[1]) {
-            cout << rebounds << " ";
+            totalSeasonRebounds += rebounds;
         }
+        cout << left << setw(columnWidth) << totalSeasonRebounds;
+
+        // Display total season assists for the team
+        int totalSeasonAssists = 0;
+        for (const int assists : statsArray[2]) {
+            totalSeasonAssists += assists;
+        }
+        cout << left << setw(columnWidth) << totalSeasonRebounds;
         cout << endl;
 
-        // Display assists for each game
-        cout << "Assists per game: ";
-        for (const int assists : statsArray[2]) {
-            cout << assists << " ";
-        }
-        cout << endl;
     }
 }
 

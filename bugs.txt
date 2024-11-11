@@ -3,3 +3,5 @@ Reporting bugs below:
 - Correction: My team names data in the txt file had two words - changed to just one word for the team name
 2. When displaying the games being played, my for loop was showing game 6 as the first game played
 - Correction: Needed to adjust the for loop to begin at 4 instead of 5
+3. When displaying season table the output was not displaying correctly
+- Correction: I needed to include an endl after each iteration of the loop displaying data
