@@ -15,6 +15,17 @@ using namespace std;
     // creates a variable to randomly assign how the team is going to play
     // randomly create stats for points, rebounds, assists - add to the lists
 void simulateGame(map<string, array<list<int>, 3> > &teamStats, const string &teamName) {
+    // performance factor will be randomized each time a simulation is made
+    // variable will factor heavily in how each team performs 
+    int performanceFactor = (rand() % 10 + 1);
+    cout << "Performance Factor: " << performanceFactor << endl;
+
+    int teamPoints = (80 + (rand() % (140 - 80 + 1)));
+    float pointBonus = performanceFactor / 10;
+    int totalPoints = teamPoints * (1 + performanceFactor;
+
+    teamStats[teamName][0].push_back(totalPoints));
+
     // Add random numbers to the team's lists in the map
     teamStats[teamName][0].push_back(rand() % 40 + 1);
     teamStats[teamName][1].push_back(rand() % 20 + 1);
@@ -41,7 +52,7 @@ void check_stats(map<string, array<list<int>, 3> > &teamStats, const string &tea
 // Define main function
 int main() {
     cout << "Welcome to the start of a new basketball season!" << endl;
-    cout << "------------------------------------------------" << endl;
+    cout << "------------------------------------------------" << endl << endl;
 
     // Initialize a map used to store team information - each team will have array of lists for points, rebounds, assists
     map<string, array<list<int>, 3>> teamStats;
@@ -53,10 +64,11 @@ int main() {
         return 1;
     }
 
+    // using the team_data.txt file to initially simulate 4 games: 25 games * 4 teams = 100 lines of data processed by program
     // read data from external file and use to populate the map
         // Store the initial team names into the map
         // for each line - get the stats from the file
-            // put the stats into the proper list for the team
+        // put the stats into the proper list for the team
     string teamName;
     int points, rebounds, assists;
 
@@ -83,20 +95,20 @@ int main() {
     // close file
     file.close();
 
-    cout << ""
+    cout << "First 4 games of the season have been simulated!" << endl;
 
-    // // Time based simulation of the 25 game season
-    //     // For a loop of 25 times
-    //     for (int i = 0; i < 1; i++){
+    // Time based simulation of the 25 game season
+        // For a loop of 25 times
+        for (int i = 0; i < 1; i++){
 
-    //         cout << "Game " << i + 1 << " has been played" << endl;
-    //         // Go through each team on map 
-    //         for (auto & pair : teamStats) {
-    //             // call the function to input stats for one game for the team
-    //             simulateGame(teamStats, pair.first);
-    //         }
-    //             // call the function to input stats for one game for the team
-    //     }
+            cout << "Game " << i + 1 << " has been played" << endl;
+            // Go through each team on map 
+            for (auto & pair : teamStats) {
+                // call the function to input stats for one game for the team
+                simulateGame(teamStats, pair.first);
+            }
+                // call the function to input stats for one game for the team
+        }
 
     //check_stats(teamStats, "Lakers");
 
