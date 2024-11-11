@@ -16,3 +16,9 @@ Reporting bugs below:
 
 6. Peformance factor was not factoring in correctly and the totals were too much
 - Correction: changed the total points calculation to teamPoints * (1 + bonus) and fixed the issue
+
+7. When inputting the map into the function kept running into an error
+- Correction: had to change the parameter input to map<string, array<list<int>, 3> > &teamStats
+
+8. When calculating the averages I wasn't able to get the decimal points to display to the user
+- Correction: Needed to use static_cast<float> to see floating point values
