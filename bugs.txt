@@ -14,4 +14,5 @@ Reporting bugs below:
 5. Each time I ran a simulation the simulation statistics would be the same and the winner would be the same each time.
 - Correction: I needed to seed with srand(time(0)) so each time the randomness of the simulation would produce different outputs
 
-6. 
+6. Peformance factor was not factoring in correctly and the totals were too much
+- Correction: changed the total points calculation to teamPoints * (1 + bonus) and fixed the issue
