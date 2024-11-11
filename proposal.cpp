@@ -55,18 +55,29 @@ int main() {
         // Store the initial team names into the map
         // for each line - get the stats from the file
             // put the stats into the proper list for the team
-    string teamName;
-    int points, rebounds, assists;
-    file >> teamName >> points >> rebounds >> assists;
-
-    // insert team name
-    teamStats[teamName] = array<list<int>, 3>();
     
-    // for initial get the data into the map
-    teamStats[teamName][0].push_back(points);
-    teamStats[teamName][1].push_back(rebounds);
-    teamStats[teamName][2].push_back(assists);
+    while (file) {
 
+        string teamName;
+        int points, rebounds, assists;
+
+        file >> teamName >> points >> rebounds >> assists;
+
+        bool found = false;
+
+        if (teamStats.find(teamName) != teamStats.end()) {
+
+        }
+        else {
+            // insert team name
+            teamStats[teamName] = array<list<int>, 3>();
+        
+            // for initial get the data into the map
+            teamStats[teamName][0].push_back(points);
+            teamStats[teamName][1].push_back(rebounds);
+            teamStats[teamName][2].push_back(assists);
+        }
+    }
     // close file
     file.close();
 
