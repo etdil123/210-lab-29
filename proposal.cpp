@@ -40,6 +40,9 @@ void check_stats(map<string, array<list<int>, 3> > &teamStats, const string &tea
 
 // Define main function
 int main() {
+    cout << "Welcome to the start of a new basketball season!" << endl;
+    cout << "------------------------------------------------" << endl;
+
     // Initialize a map used to store team information - each team will have array of lists for points, rebounds, assists
     map<string, array<list<int>, 3>> teamStats;
     // Open external file to read data on first 5 games of the season 
@@ -50,24 +53,23 @@ int main() {
         return 1;
     }
 
-    
     // read data from external file and use to populate the map
         // Store the initial team names into the map
         // for each line - get the stats from the file
             // put the stats into the proper list for the team
-    
-    while (file) {
+    string teamName;
+    int points, rebounds, assists;
 
-        string teamName;
-        int points, rebounds, assists;
+    while (file >> teamName >> points >> rebounds >> assists) {
 
-        file >> teamName >> points >> rebounds >> assists;
-
-        bool found = false;
-
+        // check if the teamName is already in the map
         if (teamStats.find(teamName) != teamStats.end()) {
-
+            // for initial get the data into the map
+            teamStats[teamName][0].push_back(points);
+            teamStats[teamName][1].push_back(rebounds);
+            teamStats[teamName][2].push_back(assists);
         }
+        // else not in map - add team into map
         else {
             // insert team name
             teamStats[teamName] = array<list<int>, 3>();
@@ -81,20 +83,22 @@ int main() {
     // close file
     file.close();
 
-    // Time based simulation of the 25 game season
-        // For a loop of 25 times
-        for (int i = 0; i < 1; i++){
+    cout << ""
 
-            cout << "Game " << i + 1 << " has been played" << endl;
-            // Go through each team on map 
-            for (auto & pair : teamStats) {
-                // call the function to input stats for one game for the team
-                simulateGame(teamStats, pair.first);
-            }
-                // call the function to input stats for one game for the team
-        }
+    // // Time based simulation of the 25 game season
+    //     // For a loop of 25 times
+    //     for (int i = 0; i < 1; i++){
 
-    check_stats(teamStats, "Lakers");
+    //         cout << "Game " << i + 1 << " has been played" << endl;
+    //         // Go through each team on map 
+    //         for (auto & pair : teamStats) {
+    //             // call the function to input stats for one game for the team
+    //             simulateGame(teamStats, pair.first);
+    //         }
+    //             // call the function to input stats for one game for the team
+    //     }
+
+    //check_stats(teamStats, "Lakers");
 
     // rank and display the teams at the end of the season to show season performance
     cout << "Season Rankings: " << endl;
