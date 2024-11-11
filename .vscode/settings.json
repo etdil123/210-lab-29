@@ -4,6 +4,7 @@
         "ostream": "cpp",
         "list": "cpp",
         "array": "cpp",
-        "iostream": "cpp"
+        "iostream": "cpp",
+        "map": "cpp"
     }
 }

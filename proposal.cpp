@@ -10,6 +10,10 @@
 #include <ctime>
 using namespace std;
 
+void simulateGame(map<string, array<list<int>, 3> > &teamStats, const string &teamName);
+
+void determineWinner(map<string, array<list<int>, 3> > &teamStats);
+
 // Definition for function to simulate a game for a team 
     // parameters: map of team and list to update stats
     // creates a variable to randomly assign how the team is going to play
@@ -42,6 +46,26 @@ void simulateGame(map<string, array<list<int>, 3> > &teamStats, const string &te
     // add total assists to list of assists for the team
     teamStats[teamName][2].push_back(totalAssists);
 
+}
+
+void determineWinner(map<string, array<list<int>, 3> > &teamStats) {
+    string winner;
+    int maxPoints = 0;
+
+    for (const auto& [teamName, statsArray] : teamStats) {
+        // accumulate total points 
+        int totalSeasonPoints = 0;
+        for (const int points : statsArray[0]) {
+            totalSeasonPoints += points;
+        }
+
+        if (totalSeasonPoints > maxPoints) {
+            maxPoints = totalSeasonPoints;
+            winner = teamName;
+        }
+    }
+
+    cout << 
 }
 
 void check_stats(map<string, array<list<int>, 3> > &teamStats, const string &teamName) {
@@ -136,7 +160,7 @@ int main() {
 
     // display header of tables
     cout << left << setw(columnWidth) << "Team: " << setw(columnWidth) << "Total Points" << setw(columnWidth) << "Avg Points" 
-    << setw(columnWidth) << "Total Assists" << setw(columnWidth) << "Total Rebounds" << endl;
+    << setw(columnWidth) << "Total Rebounds" << setw(columnWidth) << "Total Assists" << endl;
 
     for (const auto& [teamName, statsArray] : teamStats) {
 
@@ -167,9 +191,10 @@ int main() {
         for (const int assists : statsArray[2]) {
             totalSeasonAssists += assists;
         }
-        cout << left << setw(columnWidth) << totalSeasonRebounds;
+        cout << left << setw(columnWidth) << totalSeasonAssists;
         cout << endl;
-
     }
+
+
 }
 
