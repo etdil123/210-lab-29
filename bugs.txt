@@ -1,3 +1,5 @@
 Reporting bugs below:
 1. One bug is that the output is only displaying the first team in the dataset - not all 25 
 - Correction: My team names data in the txt file had two words - changed to just one word for the team name
+2. When displaying the games being played, my for loop was showing game 6 as the first game played
+- Correction: Needed to adjust the for loop to begin at 4 instead of 5

@@ -107,11 +107,11 @@ int main() {
     // close file
     file.close();
 
-    cout << "First 4 games of the season have been simulated!" << endl;
+    cout << "First 4 games of the season have been simulated using data file!" << endl;
 
     // Time based simulation of the 25 game season
         // For a loop of 25 times
-        for (int i = 0; i < 25; i++){
+        for (int i = 4; i < 25; i++){
 
             // Go through each team on map 
             for (auto & pair : teamStats) {
@@ -127,32 +127,32 @@ int main() {
     // rank and display the teams at the end of the season to show season performance
     cout << "Season Rankings: " << endl;
 
-    // // end the main function
-    // // Iterate through each team in teamStats
-    // // Iterate through each team in teamStats
-    // for (const auto& [teamName, statsArray] : teamStats) {
-    //     cout << "Team: " << teamName << endl;
+    // end the main function
+    // Iterate through each team in teamStats
+    // Iterate through each team in teamStats
+    for (const auto& [teamName, statsArray] : teamStats) {
+        cout << "Team: " << teamName << endl;
 
-    //     // Display points for each game
-    //     cout << "Points per game: ";
-    //     for (const int points : statsArray[0]) {
-    //         cout << points << " ";
-    //     }
-    //     cout << endl;
+        // Display points for each game
+        cout << "Points per game: ";
+        for (const int points : statsArray[0]) {
+            cout << points << " ";
+        }
+        cout << endl;
 
-    //     // Display rebounds for each game
-    //     cout << "Rebounds per game: ";
-    //     for (const int rebounds : statsArray[1]) {
-    //         cout << rebounds << " ";
-    //     }
-    //     cout << endl;
+        // Display rebounds for each game
+        cout << "Rebounds per game: ";
+        for (const int rebounds : statsArray[1]) {
+            cout << rebounds << " ";
+        }
+        cout << endl;
 
-    //     // Display assists for each game
-    //     cout << "Assists per game: ";
-    //     for (const int assists : statsArray[2]) {
-    //         cout << assists << " ";
-    //     }
-    //     cout << endl;
-    // }
+        // Display assists for each game
+        cout << "Assists per game: ";
+        for (const int assists : statsArray[2]) {
+            cout << assists << " ";
+        }
+        cout << endl;
+    }
 }
 
