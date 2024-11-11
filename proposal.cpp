@@ -11,7 +11,6 @@
 using namespace std;
 
 void simulateGame(map<string, array<list<int>, 3> > &teamStats, const string &teamName);
-
 void determineWinner(map<string, array<list<int>, 3> > &teamStats);
 
 // Definition for function to simulate a game for a team 
@@ -47,25 +46,28 @@ void simulateGame(map<string, array<list<int>, 3> > &teamStats, const string &te
     teamStats[teamName][2].push_back(totalAssists);
 
 }
-
+// determineWinner takes in the map of all stats and returns nothing
+// Function will add up total points for each team and display to user the team with the most points aka the winner of the season
 void determineWinner(map<string, array<list<int>, 3> > &teamStats) {
     string winner;
     int maxPoints = 0;
-
+    
+    // loop through each team in the map
     for (const auto& [teamName, statsArray] : teamStats) {
         // accumulate total points 
         int totalSeasonPoints = 0;
         for (const int points : statsArray[0]) {
             totalSeasonPoints += points;
         }
-
+        // if the total points calculated is greater than maxPoints
         if (totalSeasonPoints > maxPoints) {
+            // set maxPoints to total and winner to the name of the team 
             maxPoints = totalSeasonPoints;
             winner = teamName;
         }
     }
-
-    cout << "\nThe winner of the league is the " << winner << " with " << maxPoints << " total points scored!" << endl;
+    // display the winner to the user
+    cout << "\nThe winner of the league is the " << winner << " with " << maxPoints << " total points scored!" << endl << endl;
 }
 
 void check_stats(map<string, array<list<int>, 3> > &teamStats, const string &teamName) {
