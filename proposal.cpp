@@ -19,17 +19,28 @@ void simulateGame(map<string, array<list<int>, 3> > &teamStats, const string &te
     // variable will factor heavily in how each team performs 
     int performanceFactor = (rand() % 10 + 1);
     cout << "Performance Factor: " << performanceFactor << endl;
+    float bonus = performanceFactor / 10;
 
+    // randomize points
     int teamPoints = (80 + (rand() % (140 - 80 + 1)));
-    float pointBonus = performanceFactor / 10;
-    int totalPoints = teamPoints * (1 + performanceFactor;
+    // get a total by factoring in the performance factor
+    int totalPoints = teamPoints * (1 + bonus);
+    // add total points to list of points for team in map
+    teamStats[teamName][0].push_back(totalPoints);
 
-    teamStats[teamName][0].push_back(totalPoints));
+    // randomize rebounds
+    int teamRebounds = (30 + (rand() % (60 - 30 + 1)));
+    // get total by factoring in performance factor
+    int totalRebounds = teamRebounds * (1 + bonus);
+    // add the total rebounds to list of rebounds
+    teamStats[teamName][1].push_back(totalRebounds);
 
-    // Add random numbers to the team's lists in the map
-    teamStats[teamName][0].push_back(rand() % 40 + 1);
-    teamStats[teamName][1].push_back(rand() % 20 + 1);
-    teamStats[teamName][2].push_back(rand() % 10 + 1);
+    // randomize assists
+    int teamAssists = (10 + (rand() % (40 - 10 + 1)));
+    // total assists by factoring in performance factor
+    int totalAssists = teamAssists * (1 + bonus);
+    // add total assists to list of assists for the team
+    teamStats[teamName][2].push_back(totalAssists);
 
 }
 
@@ -101,13 +112,14 @@ int main() {
         // For a loop of 25 times
         for (int i = 0; i < 1; i++){
 
-            cout << "Game " << i + 1 << " has been played" << endl;
             // Go through each team on map 
             for (auto & pair : teamStats) {
+                cout << pair.first << endl;
                 // call the function to input stats for one game for the team
                 simulateGame(teamStats, pair.first);
             }
-                // call the function to input stats for one game for the team
+            
+            cout << "Game " << i + 1 << " has been played" << endl;
         }
 
     //check_stats(teamStats, "Lakers");
