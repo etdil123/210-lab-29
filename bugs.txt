@@ -1,2 +1,3 @@
 Reporting bugs below:
-1. 
+1. One bug is that the output is only displaying the first team in the dataset - not all 25 
+- Correction: My team names data in the txt file had two words - changed to just one word for the team name
