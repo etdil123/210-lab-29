@@ -135,14 +135,22 @@ int main() {
     // Iterate through each team in teamStats
     for (const auto& [teamName, statsArray] : teamStats) {
 
-        cout << left << setw(columnWidth) << "Team: " << setw(columnWidth) << teamName << endl;
+        // display header of tables
+        cout << left << setw(columnWidth) << "Team: " << setw(columnWidth) << "Total Points" << setw(columnWidth) << "Avg Points per Game" 
+        << setw(columnWidth) << "Total Assists" << setw(columnWidth) << "Total Rebounds" << endl;
 
-        // Display points for each game
-        cout << "Points per game: ";
+        // display team name
+        cout << left << setw(columnWidth) << teamName;
+        
+        // accumulate total points 
+        int totalSeasonPoints = 0;
         for (const int points : statsArray[0]) {
-            cout << points << " ";
+            totalSeasonPoints += points;
         }
-        cout << endl;
+        float avgSeasonPoints = static_cast<float>(totalSeasonPoints) / 25;
+
+        cout << left << setw(columnWidth) << totalSeasonPoints;
+        cout << left << setw(columnWidth) << avgSeasonPoints;
 
         // Display rebounds for each game
         cout << "Rebounds per game: ";
