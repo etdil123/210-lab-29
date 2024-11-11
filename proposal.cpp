@@ -10,16 +10,64 @@
 #include <ctime>
 using namespace std;
 
+void simulateGame(map<string, array<list<int>, 3> > &teamStats, const string &teamName);
+void determineWinner(map<string, array<list<int>, 3> > &teamStats);
+
 // Definition for function to simulate a game for a team 
     // parameters: map of team and list to update stats
     // creates a variable to randomly assign how the team is going to play
     // randomly create stats for points, rebounds, assists - add to the lists
 void simulateGame(map<string, array<list<int>, 3> > &teamStats, const string &teamName) {
-    // Add random numbers to the team's lists in the map
-    teamStats[teamName][0].push_back(rand() % 40 + 1);
-    teamStats[teamName][1].push_back(rand() % 20 + 1);
-    teamStats[teamName][2].push_back(rand() % 10 + 1);
+    // performance factor will be randomized each time a simulation is made
+    // variable will factor heavily in how each team performs 
+    int performanceFactor = (rand() % 10 + 1);
+    //cout << "Performance Factor: " << performanceFactor << endl;
+    float bonus = performanceFactor / 10;
 
+    // randomize points
+    int teamPoints = (80 + (rand() % (140 - 80 + 1)));
+    // get a total by factoring in the performance factor
+    int totalPoints = teamPoints * (1 + bonus);
+    // add total points to list of points for team in map
+    teamStats[teamName][0].push_back(totalPoints);
+
+    // randomize rebounds
+    int teamRebounds = (30 + (rand() % (60 - 30 + 1)));
+    // get total by factoring in performance factor
+    int totalRebounds = teamRebounds * (1 + bonus);
+    // add the total rebounds to list of rebounds
+    teamStats[teamName][1].push_back(totalRebounds);
+
+    // randomize assists
+    int teamAssists = (10 + (rand() % (40 - 10 + 1)));
+    // total assists by factoring in performance factor
+    int totalAssists = teamAssists * (1 + bonus);
+    // add total assists to list of assists for the team
+    teamStats[teamName][2].push_back(totalAssists);
+
+}
+// determineWinner takes in the map of all stats and returns nothing
+// Function will add up total points for each team and display to user the team with the most points aka the winner of the season
+void determineWinner(map<string, array<list<int>, 3> > &teamStats) {
+    string winner;
+    int maxPoints = 0;
+    
+    // loop through each team in the map
+    for (const auto& [teamName, statsArray] : teamStats) {
+        // accumulate total points 
+        int totalSeasonPoints = 0;
+        for (const int points : statsArray[0]) {
+            totalSeasonPoints += points;
+        }
+        // if the total points calculated is greater than maxPoints
+        if (totalSeasonPoints > maxPoints) {
+            // set maxPoints to total and winner to the name of the team 
+            maxPoints = totalSeasonPoints;
+            winner = teamName;
+        }
+    }
+    // display the winner to the user
+    cout << "\nThe winner of the league is the " << winner << " with " << maxPoints << " total points scored!" << endl << endl;
 }
 
 void check_stats(map<string, array<list<int>, 3> > &teamStats, const string &teamName) {
@@ -40,6 +88,13 @@ void check_stats(map<string, array<list<int>, 3> > &teamStats, const string &tea
 
 // Define main function
 int main() {
+    srand(time(0));
+    int columnWidth = 20;
+
+    cout << "\n------------------------------------------------" << endl;
+    cout << "Welcome to the start of a new basketball season!" << endl;
+    cout << "------------------------------------------------" << endl << endl;
+
     // Initialize a map used to store team information - each team will have array of lists for points, rebounds, assists
     map<string, array<list<int>, 3>> teamStats;
     // Open external file to read data on first 5 games of the season 
@@ -50,70 +105,99 @@ int main() {
         return 1;
     }
 
-    
+    // using the team_data.txt file to initially simulate 4 games: 25 games * 4 teams = 100 lines of data processed by program
     // read data from external file and use to populate the map
         // Store the initial team names into the map
         // for each line - get the stats from the file
-            // put the stats into the proper list for the team
+        // put the stats into the proper list for the team
     string teamName;
     int points, rebounds, assists;
-    file >> teamName >> points >> rebounds >> assists;
 
-    // insert team name
-    teamStats[teamName] = array<list<int>, 3>();
-    
-    // for initial get the data into the map
-    teamStats[teamName][0].push_back(points);
-    teamStats[teamName][1].push_back(rebounds);
-    teamStats[teamName][2].push_back(assists);
+    while (file >> teamName >> points >> rebounds >> assists) {
 
+        // check if the teamName is already in the map
+        if (teamStats.find(teamName) != teamStats.end()) {
+            // for initial get the data into the map
+            teamStats[teamName][0].push_back(points);
+            teamStats[teamName][1].push_back(rebounds);
+            teamStats[teamName][2].push_back(assists);
+        }
+        // else not in map - add team into map
+        else {
+            // insert team name
+            teamStats[teamName] = array<list<int>, 3>();
+        
+            // for initial get the data into the map
+            teamStats[teamName][0].push_back(points);
+            teamStats[teamName][1].push_back(rebounds);
+            teamStats[teamName][2].push_back(assists);
+        }
+    }
     // close file
     file.close();
 
+    cout << "First 4 games of the season have been simulated using data file!" << endl;
+
     // Time based simulation of the 25 game season
         // For a loop of 25 times
-        for (int i = 0; i < 1; i++){
+        for (int i = 4; i < 25; i++){
 
-            cout << "Game " << i + 1 << " has been played" << endl;
             // Go through each team on map 
             for (auto & pair : teamStats) {
                 // call the function to input stats for one game for the team
                 simulateGame(teamStats, pair.first);
             }
-                // call the function to input stats for one game for the team
+            
+            cout << "   >Game " << i + 1 << " has been played" << endl;
         }
 
-    check_stats(teamStats, "Lakers");
+    //check_stats(teamStats, "Lakers");
 
     // rank and display the teams at the end of the season to show season performance
-    cout << "Season Rankings: " << endl;
+    cout << "\nSeason Rankings: " << endl;
 
     // end the main function
     // Iterate through each team in teamStats
     // Iterate through each team in teamStats
+
+    // display header of tables
+    cout << left << setw(columnWidth) << "Team: " << setw(columnWidth) << "Total Points" << setw(columnWidth) << "Avg Points" 
+    << setw(columnWidth) << "Total Rebounds" << setw(columnWidth) << "Total Assists" << endl;
+
     for (const auto& [teamName, statsArray] : teamStats) {
-        cout << "Team: " << teamName << endl;
 
-        // Display points for each game
-        cout << "Points per game: ";
+        // display team name
+        cout << left << setw(columnWidth) << teamName;
+        
+        // accumulate total points 
+        int totalSeasonPoints = 0;
         for (const int points : statsArray[0]) {
-            cout << points << " ";
+            totalSeasonPoints += points;
         }
-        cout << endl;
+        // get average points per game
+        float avgSeasonPoints = static_cast<float>(totalSeasonPoints) / 25;
+        
+        // display total and average points
+        cout << left << setw(columnWidth) << totalSeasonPoints;
+        cout << left << setw(columnWidth) << avgSeasonPoints;
 
-        // Display rebounds for each game
-        cout << "Rebounds per game: ";
+        // Display total season rebounds for the team
+        int totalSeasonRebounds = 0;
         for (const int rebounds : statsArray[1]) {
-            cout << rebounds << " ";
+            totalSeasonRebounds += rebounds;
         }
-        cout << endl;
+        cout << left << setw(columnWidth) << totalSeasonRebounds;
 
-        // Display assists for each game
-        cout << "Assists per game: ";
+        // Display total season assists for the team
+        int totalSeasonAssists = 0;
         for (const int assists : statsArray[2]) {
-            cout << assists << " ";
+            totalSeasonAssists += assists;
         }
+        cout << left << setw(columnWidth) << totalSeasonAssists;
         cout << endl;
     }
+
+    determineWinner(teamStats);
+
 }
 
