@@ -65,7 +65,7 @@ void determineWinner(map<string, array<list<int>, 3> > &teamStats) {
         }
     }
 
-    cout << 
+    cout << "\nThe winner of the league is the " << winner << " with " << maxPoints << " total points scored!" << endl;
 }
 
 void check_stats(map<string, array<list<int>, 3> > &teamStats, const string &teamName) {
@@ -86,12 +86,12 @@ void check_stats(map<string, array<list<int>, 3> > &teamStats, const string &tea
 
 // Define main function
 int main() {
-
+    srand(time(0));
     int columnWidth = 20;
 
-    cout << "------------------------------------------------" << endl;
+    cout << "\n------------------------------------------------" << endl;
     cout << "Welcome to the start of a new basketball season!" << endl;
-    cout << "------------------------------------------------" << endl;
+    cout << "------------------------------------------------" << endl << endl;
 
     // Initialize a map used to store team information - each team will have array of lists for points, rebounds, assists
     map<string, array<list<int>, 3>> teamStats;
@@ -152,7 +152,7 @@ int main() {
     //check_stats(teamStats, "Lakers");
 
     // rank and display the teams at the end of the season to show season performance
-    cout << "Season Rankings: " << endl;
+    cout << "\nSeason Rankings: " << endl;
 
     // end the main function
     // Iterate through each team in teamStats
@@ -195,6 +195,7 @@ int main() {
         cout << endl;
     }
 
+    determineWinner(teamStats);
 
 }
 
